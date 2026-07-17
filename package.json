@@ -1,0 +1,24 @@
+{
+  "name": "testnet-faucet",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Self-hosted Node service that drips 0.1% of its current reserves of testnet WART to requesting addresses. Talks to a public defi testnet node. Used by the website's /testnet page.",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "NODE_ENV=development PORT=$(node scripts/find-free-port.cjs) node --watch src/server.js",
+    "gen-key": "node scripts/gen-key.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "pino": "^9.5.0",
+    "pino-http": "^10.3.0",
+    "qrcode": "^1.5.4",
+    "warthog-js": "github:warthog-network/warthog-js"
+  }
+}
