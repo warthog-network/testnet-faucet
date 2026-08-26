@@ -21,7 +21,7 @@ Used by the website's `/testnet` page.
 | How is the drip amount calculated? | `floor( selfBalance * (DRIP_PERCENT/100) - TX_FEE )`, with `DRIP_PERCENT=0.1` and `TX_FEE=0.001` defaults. The fee comes out of the 0.1%. |
 | Is there a `MIN_DRIP` guard? | **No.** If `floor( selfBalance * 0.001 - fee )` is ≤ 0, the drip is refused with `503 { ok:false, error:"drip too small" }`. |
 | How is the balance polled? | `GET {NODE_URL}/account/{faucetAddress}/wart_balance`, default every 60 s (`BALANCE_POLL_MS=60000`). State is in-memory; no persistent storage. |
-| What is the faucet's domain? | `faucet.testnet.warthog.network` — this is the only faucet. |
+| What is the faucet's domain? | `testnet-faucet.warthog.network` — this is the only faucet. |
 
 ## Conventions
 

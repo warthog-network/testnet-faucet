@@ -5,6 +5,8 @@ testnet WART to a requesting address, with a per-IP rate limit of
 **2 payments per rolling 24 hours**. Used by the website's `/testnet`
 page.
 
+**Website:** <https://testnet-faucet.warthog.network/>
+
 The faucet's WART address is **derived at boot from `FAUCET_HEX_PRIVKEY`**
 via `warthog-js`. It is never hard-coded in any file.
 
@@ -110,15 +112,15 @@ sudo systemctl enable --now testnet-faucet
 
 The faucet's IP detection requires nginx to **rewrite** `X-Forwarded-For`
 from the immediate peer, not pass through a client-supplied header. A safe
-nginx server block for `faucet.testnet.warthog.network`:
+nginx server block for `testnet-faucet.warthog.network`:
 
 ```nginx
 server {
   listen 443 ssl http2;
-  server_name faucet.testnet.warthog.network;
+  server_name testnet-faucet.warthog.network;
 
-  ssl_certificate     /etc/letsencrypt/live/faucet.testnet.warthog.network/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/faucet.testnet.warthog.network/privkey.pem;
+  ssl_certificate     /etc/letsencrypt/live/testnet-faucet.warthog.network/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/testnet-faucet.warthog.network/privkey.pem;
 
   real_ip_header X-Forwarded-For;
   set_real_ip_from 127.0.0.1;
@@ -135,7 +137,7 @@ server {
 
 server {
   listen 80;
-  server_name faucet.testnet.warthog.network;
+  server_name testnet-faucet.warthog.network;
   return 301 https://$host$request_uri;
 }
 ```

@@ -121,7 +121,7 @@ docker run -d --name testnet-faucet --restart unless-stopped \
 ```
 
 The container listens on `127.0.0.1:3000` only; nginx in front of it
-adds the public-facing `faucet.testnet.warthog.network` and TLS.
+adds the public-facing `testnet-faucet.warthog.network` and TLS.
 
 ## Reverse proxy (nginx)
 
@@ -132,10 +132,10 @@ client-supplied value. A safe nginx server block for the testnet faucet:
 ```nginx
 server {
   listen 443 ssl http2;
-  server_name faucet.testnet.warthog.network;
+  server_name testnet-faucet.warthog.network;
 
-  ssl_certificate     /etc/letsencrypt/live/faucet.testnet.warthog.network/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/faucet.testnet.warthog.network/privkey.pem;
+  ssl_certificate     /etc/letsencrypt/live/testnet-faucet.warthog.network/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/testnet-faucet.warthog.network/privkey.pem;
 
   # Trust the value that nginx itself observes as the remote_addr. Do NOT
   # pass through the client-supplied header.
