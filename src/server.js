@@ -29,6 +29,8 @@ const log = pino({ level: process.env.LOG_LEVEL || "info" });
 const app = express();
 app.use(pinoHttp({ logger: log }));
 app.use(express.json({ limit: "8kb" }));
+app.use(express.static("public"));
+app.get("/favicon.ico", (_req, res) => res.status(204).end());
 
 // Reverse-proxy posture. See README "TRUST_PROXY" section.
 applyTrustProxy(app);
@@ -112,7 +114,11 @@ function renderLandingPage({ address, reserve, dripDisplay, qrDataUrl }) {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0a0d14" />
 <title>Warthog Testnet Faucet</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
 <style>
   :root { color-scheme: dark; }
   body { font-family: ui-sans-serif, system-ui, sans-serif; max-width: 38rem; margin: 3rem auto; padding: 0 1.25rem; color: #e6e8ec; background: #0a0d14; }

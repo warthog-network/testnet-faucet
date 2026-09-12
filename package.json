@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "dev": "NODE_ENV=development PORT=$(node scripts/find-free-port.cjs) node --watch src/server.js",
+    "dev": "bash -c 'KEY=$(node --env-file-if-exists=.env scripts/dev-privkey.cjs); if [ -n \"$KEY\" ]; then export FAUCET_HEX_PRIVKEY=\"$KEY\"; fi; ENV_FLAG=\"\"; [ -f .env ] && ENV_FLAG=\"--env-file-if-exists=.env\"; NODE_ENV=development PORT=$(node scripts/find-free-port.cjs) node $ENV_FLAG --watch src/server.js'",
     "gen-key": "node scripts/gen-key.js"
   },
   "dependencies": {
